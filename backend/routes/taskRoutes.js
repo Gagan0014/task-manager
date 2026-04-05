@@ -26,4 +26,22 @@ router.get('/task',async(req,res)=>{
     }
 });
 
+// need to create a update route now 
+
+router.put('/task/:id',async(req,res)=>{
+    try{
+    const id = req.params.id;
+    const updatedTask = await Task.findByIdAndUpdate(
+        id,
+        req.body,
+        {
+            new:true
+        }
+    );
+    res.json(updatedTask);
+    }catch(error){
+        res.status(500).json({message:error.message});
+    }
+});
+
 export default router
