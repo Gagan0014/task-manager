@@ -16,5 +16,14 @@ router.post('/task',async(req,res)=>{
         res.status(500).json({message: error.message});
     }
 });
+// need to get data from database and show that on browser
+router.get('/task',async(req,res)=>{
+    try{
+        const tasks = await Task.find();
+        res.json(tasks);
+    }catch(error){
+        res.status(500).json({message:error.message});
+    }
+});
 
 export default router
