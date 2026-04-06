@@ -13,5 +13,6 @@ router.post('/task', createTask)
 router.get('/task', getTask)
 router.put('/task/:id', updateTask)
 router.delete('/task/:id', deleteTask)
+router.get('/task/:id',getByid)
 
 export default router
