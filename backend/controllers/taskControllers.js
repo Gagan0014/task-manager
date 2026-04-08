@@ -1,8 +1,11 @@
 import Task from '../models/task.js'
 import asyncHandler from '../utils/asyncHandler.js';
 
-export const getByid = asyncHandler(async (req,res)=>{
-    const task = await Task.findById(req.params.body);
+export const getTaskByid = asyncHandler(async (req,res)=>{
+    const task = await Task.findOne({
+      _id:req.params.id,
+      user:req.user._id
+    });
     if(!task){
         throw new Error("task not found");
     }
@@ -19,9 +22,12 @@ export const createTask = asyncHandler(async (req, res) => {
     throw new Error("Title is required");
   }
 
-  const newTask = new Task(data);
+    const newTask = new Task({
+    title: data.title,
+    user: req.user._id
+    });
   const savedTask = await newTask.save();
-
+  console.log(req.body);
   res.status(201).json({
     success: true,
     data: savedTask
@@ -29,7 +35,7 @@ export const createTask = asyncHandler(async (req, res) => {
 });
 
 export const getTask = asyncHandler(async(req,res)=>{
-    const tasks =await Task.find();
+    const tasks =await Task.find({user:req.user._id});
 
     res.json({
         success:true,
@@ -38,8 +44,11 @@ export const getTask = asyncHandler(async(req,res)=>{
 });
 
 export const updateTask = asyncHandler(async (req, res) => {
-  const updatedTask = await Task.findByIdAndUpdate(
-    req.params.id,
+  const updatedTask = await Task.findByOneAndUpdate(
+    {
+      _id:req.params.id,
+      user:req.user._id
+    },
     req.body,
     { new: true }
   );
@@ -55,7 +64,10 @@ export const updateTask = asyncHandler(async (req, res) => {
 });
 
 export const deleteTask =asyncHandler(async (req,res)=>{
-    const task = await Task.findByIdAndDelete(req.params.id);
+    const task = await Task.findOneAndDelete({
+      _id:req.params.id,
+      user:req.user._id
+    });
     if(!task){
         throw new Error("task not found");
     }

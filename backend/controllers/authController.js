@@ -42,11 +42,10 @@ export const login = asyncHandler(async (req,res)=>{
         throw new Error("Invalid Credentials")
     }
     const token = jwt.sign(
-        {id:user.id},
+        {id:user._id},
         process.env.JWT_SECRET,
         {expiresIn:'1d'}
     )
-
     res.json({
         success:true,
         token

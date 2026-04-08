@@ -15,6 +15,10 @@ app.use(express.json())
 app.use('/api/auth',authRoutes)
 app.use('/api',router)
 
+app.post('/debug', (req, res) => {
+  console.log("BODY:", req.body)
+  res.json(req.body)
+})
 app.get('/',(req,res)=>{
     res.send("server is running");
 })
