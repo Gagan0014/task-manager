@@ -119,21 +119,17 @@ POST /api/auth/register
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "123456"
+  "name": "Saurabh",
+  "email": "sharma@gmail.com",
+  "password": "knowme12well"
 }
 ```
 
 Response:
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "user": {
-    "id": "64f1a2b3c4d5e6f7a8b9c0d1",
-    "name": "John Doe",
-    "email": "john@example.com"
-  }
+  "success": true,
+  "message": "user registered successfully"
 }
 ```
 
@@ -143,14 +139,15 @@ POST /api/auth/login
 Content-Type: application/json
 
 {
-  "email": "john@example.com",
-  "password": "123456"
+  "email": "sharma@gmail.com",
+  "password": "knowme12well"
 }
 ```
 
 Response:
 ```json
 {
+  "success": true,
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
@@ -162,19 +159,25 @@ Authorization: Bearer <your_token>
 Content-Type: application/json
 
 {
-  "title": "Buy groceries",
-  "description": "Milk, eggs, bread"
+  "title": "Go to market for groceries",
+  "description": "milk, butter, drinks"
 }
 ```
 
 Response:
 ```json
 {
-  "_id": "64f1a2b3c4d5e6f7a8b9c0d2",
-  "title": "Buy groceries",
-  "description": "Milk, eggs, bread",
-  "user": "64f1a2b3c4d5e6f7a8b9c0d1",
-  "createdAt": "2024-04-10T10:00:00.000Z"
+  "success": true,
+  "data": {
+    "title": "Go to market for groceries",
+    "description": "milk, butter, drinks",
+    "completed": false,
+    "user": "69d9645fbdaf5a6c384ccac5",
+    "_id": "69d9f000f51e8994d8a82b3f",
+    "createdAt": "2026-04-11T06:53:52.536Z",
+    "updatedAt": "2026-04-11T06:53:52.536Z",
+    "__v": 0
+  }
 }
 ```
 
@@ -186,14 +189,20 @@ Authorization: Bearer <your_token>
 
 Response:
 ```json
-[
-  {
-    "_id": "64f1a2b3c4d5e6f7a8b9c0d2",
-    "title": "Buy groceries",
-    "description": "Milk, eggs, bread",
-    "createdAt": "2024-04-10T10:00:00.000Z"
-  }
-]
+{
+  "success": true,
+  "data": [
+    {
+      "_id": "69d9f000f51e8994d8a82b3f",
+      "title": "Go to market for groceries",
+      "description": "milk, butter, drinks",
+      "completed": false,
+      "user": "69d9645fbdaf5a6c384ccac5",
+      "createdAt": "2026-04-11T06:53:52.536Z",
+      "updatedAt": "2026-04-11T06:53:52.536Z"
+    }
+  ]
+}
 ```
 
 ---
