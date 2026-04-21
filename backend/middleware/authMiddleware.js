@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken'
 import User from '../models/user.js';
 
 const protect = async(req,res,next)=>{
-    console.log("HEADER:", req.headers.authorization);
     let token;
     const authHeader = req.headers.authorization;
     if(req.headers.authorization && req.headers.authorization.startsWith("Bearer ")){
@@ -12,7 +11,6 @@ const protect = async(req,res,next)=>{
         req.user = await User.findById(decoded.id).select('-password')
         next();
     }catch(error){
-        console.log("JWT REAL ERROR:", error.message);
         const err = new Error("Not authorized")
         err.statusCode = 401
         next(err)

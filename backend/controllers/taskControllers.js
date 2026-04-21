@@ -24,10 +24,10 @@ export const createTask = asyncHandler(async (req, res) => {
 
     const newTask = new Task({
     title: data.title,
+    description: data.description,
     user: req.user._id
     });
   const savedTask = await newTask.save();
-  console.log(req.body);
   res.status(201).json({
     success: true,
     data: savedTask
@@ -44,7 +44,7 @@ export const getTask = asyncHandler(async(req,res)=>{
 });
 
 export const updateTask = asyncHandler(async (req, res) => {
-  const updatedTask = await Task.findByOneAndUpdate(
+  const updatedTask = await Task.findOneAndUpdate(
     {
       _id:req.params.id,
       user:req.user._id
@@ -76,3 +76,12 @@ export const deleteTask =asyncHandler(async (req,res)=>{
         message:"task deleted successfully"
     });
 }) ;
+
+export const getAllTask = asyncHandler(async(req,res)=>{
+    const tasks = await Task.find();
+
+    res.json({
+      success:true,
+      data:tasks
+    })
+})
