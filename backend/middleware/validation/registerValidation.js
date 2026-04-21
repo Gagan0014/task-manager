@@ -1,34 +1,37 @@
-const validateRegister = (req,res,next)=>{
-    const {name , email , password } = req.body;
-    if(!name){
-        return res.json({
-            sucess:false,
-            message:"Name is required"
-        });
-    }
-    if(!email){
-        return res.json({
-            success:false,
-            message:"Email is required"
-        });
-    }
-    if(!email.includes("@")){
-        return res.json({
-            success:false,
-            message:"email should contain @ "
-        })
-    }
-    if(!password){
-        return res.json({
-            success:false,
-            message:"Password is required"
-        })
-    }
-    if(password.length<8){
-        return res.json({
-            success:false,
-            message:"Password must be at least 8 characters"
-        })
-    }
-   return next();
-}
+const registerValidation = (req, res, next) => {
+  const { name, email, password } = req.body;
+
+  if (!name) {
+    const err = new Error("name is mandatory");
+    err.statusCode = 400;
+    return next(err);
+  }
+
+  if (!email) {
+    const err = new Error("email is mandatory");
+    err.statusCode = 400;
+    return next(err);
+  }
+
+  if (typeof email !== "string" || !email.includes("@")) {
+    const err = new Error("email should contain @");
+    err.statusCode = 400;
+    return next(err);
+  }
+
+  if (!password) {
+    const err = new Error("password is required");
+    err.statusCode = 400;
+    return next(err);
+  }
+
+  if (password.length < 8) {
+    const err = new Error("password length can't be less than 8");
+    err.statusCode = 400;
+    return next(err);
+  }
+
+  return next();
+};
+
+export default registerValidation;

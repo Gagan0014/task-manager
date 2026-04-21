@@ -3,10 +3,7 @@ const updateTaskValidation = (req,res,next)=>{
 
     if(title!==undefined){
         if(title.trim()===""){
-            return res.json({
-                success:false,
-                message:"title can't be empty"
-            });
+            throw new Error("title can't be empty");
         }
     }
     return next();

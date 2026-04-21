@@ -1,87 +1,105 @@
-import Task from '../models/task.js'
+import Task from '../models/task.js';
 import asyncHandler from '../utils/asyncHandler.js';
 
-export const getTaskByid = asyncHandler(async (req,res)=>{
-    const task = await Task.findOne({
-      _id:req.params.id,
-      user:req.user._id
-    });
-    if(!task){
-        throw new Error("task not found");
-    }
-    res.json({
-        success:true,
-        data:task
-    });
-});
+export const getTaskByid = asyncHandler(async (req, res, next) => {
+  const task = await Task.findOne({
+    _id: req.params.id,
+    user: req.user._id
+  });
 
-export const createTask = asyncHandler(async (req, res) => {
-  const data = req.body;
-
-  if (!data.title) {
-    throw new Error("Title is required");
+  if (!task) {
+    const err = new Error("Task not found");
+    err.statusCode = 404;
+    return next(err);
   }
 
-    const newTask = new Task({
-    title: data.title,
-    description: data.description,
+  res.status(200).json({
+    success: true,
+    data: task
+  });
+});
+
+
+export const createTask = asyncHandler(async (req, res, next) => {
+  const { title, description } = req.body;
+
+  if (!title) {
+    const err = new Error("Title is required");
+    err.statusCode = 400;
+    return next(err);
+  }
+
+  const newTask = new Task({
+    title,
+    description,
     user: req.user._id
-    });
+  });
+
   const savedTask = await newTask.save();
+
   res.status(201).json({
     success: true,
     data: savedTask
   });
 });
 
-export const getTask = asyncHandler(async(req,res)=>{
-    const tasks =await Task.find({user:req.user._id});
 
-    res.json({
-        success:true,
-        data:tasks
-    });
+export const getTask = asyncHandler(async (req, res) => {
+  const tasks = await Task.find({ user: req.user._id });
+
+  res.status(200).json({
+    success: true,
+    data: tasks
+  });
 });
 
-export const updateTask = asyncHandler(async (req, res) => {
+export const updateTask = asyncHandler(async (req, res, next) => {
   const updatedTask = await Task.findOneAndUpdate(
     {
-      _id:req.params.id,
-      user:req.user._id
+      _id: req.params.id,
+      user: req.user._id
     },
     req.body,
     { new: true }
   );
 
   if (!updatedTask) {
-    throw new Error("Task not found");
+    const err = new Error("Task not found");
+    err.statusCode = 404;
+    return next(err);
   }
 
-  res.json({
+  res.status(200).json({
     success: true,
     data: updatedTask
   });
 });
 
-export const deleteTask =asyncHandler(async (req,res)=>{
-    const task = await Task.findOneAndDelete({
-      _id:req.params.id,
-      user:req.user._id
-    });
-    if(!task){
-        throw new Error("task not found");
-    }
-    res.json({
-        success:true,
-        message:"task deleted successfully"
-    });
-}) ;
 
-export const getAllTask = asyncHandler(async(req,res)=>{
-    const tasks = await Task.find();
+export const deleteTask = asyncHandler(async (req, res, next) => {
+  const task = await Task.findOneAndDelete({
+    _id: req.params.id,
+    user: req.user._id
+  });
 
-    res.json({
-      success:true,
-      data:tasks
-    })
-})
+  if (!task) {
+    const err = new Error("Task not found");
+    err.statusCode = 404;
+    return next(err);
+  }
+
+  res.status(200).json({
+    success: true,
+    message: "Task deleted successfully"
+  });
+});
+
+
+export const getAllTask = asyncHandler(async (req, res) => {
+  const tasks = await Task.find();
+
+  res.status(200).json({
+    success: true,
+    data: tasks
+  });
+});

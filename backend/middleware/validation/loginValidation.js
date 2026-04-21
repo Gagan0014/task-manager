@@ -1,16 +1,19 @@
-const loginValidation = (req,res,next)=>{
-    const {email , password} = req.body;
-    if(!email || !password){
-        return res.json({
-            success:false,
-            message:"All credentials are required"
-        });
-    }
-    if(!email.include("@")){
-        return res.json({
-            success:false,
-            message:"email must contain @"
-        });
-    }
-    return next();
-}
+const loginValidation = (req, res, next) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    const err = new Error("All credentials are required");
+    err.statusCode = 400;
+    return next(err);
+  }
+
+  if (!email.includes("@")) {
+    const err = new Error("Email must contain @");
+    err.statusCode = 400;
+    return next(err);
+  }
+
+  return next();
+};
+
+export default loginValidation;
