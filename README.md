@@ -1,222 +1,179 @@
-# Task Manager API
+# Task Manager (Full Stack App)
 
-A REST API for managing tasks with JWT authentication built with Node.js, Express, and MongoDB.
-
-## Live Demo
-Base URL: `https://task-manager-288g.onrender.com`
+A full-stack task management application with JWT authentication, role-based access control, and a simple React frontend.
 
 ---
 
-## Tech Stack
+## 🚀 Live Demo
 
-- **Node.js** — Runtime environment
-- **Express** — Web framework
-- **MongoDB** — Database
-- **Mongoose** — ODM for MongoDB
-- **JWT** — Authentication
-- **Bcrypt** — Password hashing
+Baackend Api: `https://task-manager-288g.onrender.com`
+Frontend: Runs locally (see setup below)
+---
+
+## 🛠 Tech Stack
+
+### Backend
+
+* Node.js
+* Express
+* MongoDB
+* Mongoose
+* JWT (Authentication)
+* Bcrypt (Password hashing)
+
+### Frontend
+
+* React (Vite)
+* Fetch API
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
 ```
 backend/
 ├── config/
-│   └── db.js              # MongoDB connection
 ├── controllers/
-│   ├── authController.js  # Auth logic
-│   └── taskController.js  # Task logic
 ├── middleware/
-│   ├── authMiddleware.js  # JWT verification
-│   └── errorHandler.js    # Global error handling
 ├── models/
-│   ├── user.js            # User schema
-│   └── task.js            # Task schema
 ├── routes/
-│   ├── authRoutes.js      # Auth endpoints
-│   └── taskRoutes.js      # Task endpoints
 ├── utils/
-│   └── asyncHandler.js    # Async error wrapper
-└── server.js              # Entry point
+└── server.js
+
+frontend/
+├── src/
+│   ├── components/
+│   │   ├── Auth.jsx
+│   │   └── Dashboard.jsx
+│   └── App.jsx
 ```
 
 ---
 
-## Features
+## ✨ Features
 
-- User registration and login
-- JWT based authentication
-- Protected routes with auth middleware
-- Full task CRUD operations
-- Tasks linked to authenticated user
-- Global error handling
+* User registration & login
+* JWT-based authentication
+* Role-based access control (Admin/User)
+* Protected routes using middleware
+* CRUD operations for tasks
+* Input validation & error handling
+* Simple React UI connected to backend
 
 ---
 
-## Getting Started
+## ⚙️ Setup Instructions
 
-### Prerequisites
-- Node.js
-- MongoDB (local or Atlas)
-
-### Installation
+### 1. Clone the repository
 
 ```bash
-# Clone the repo
 git clone https://github.com/Gagan0014/task-manager.git
-cd task-manager/backend
+cd task-manager
+```
 
-# Install dependencies
+---
+
+### 2. Backend Setup
+
+```bash
+cd backend
 npm install
-
-# Create environment file
-cp .env.example .env
-
-# Start development server
 npm run dev
 ```
 
----
-
-## Environment Variables
-
-Create a `.env` file in the backend folder:
+Create `.env` file in backend:
 
 ```
 PORT=5000
 MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
+JWT_SECRET=your_secret
 ```
 
 ---
 
-## API Endpoints
+### 3. Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend runs on:
+
+```
+http://localhost:5173
+```
+
+---
+
+## 🔑 API Endpoints
 
 ### Auth Routes
 
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| POST | `/api/auth/register` | Register new user | No |
-| POST | `/api/auth/login` | Login user | No |
+| Method | Endpoint             | Description   |
+| ------ | -------------------- | ------------- |
+| POST   | `/api/auth/register` | Register user |
+| POST   | `/api/auth/login`    | Login user    |
+
+---
 
 ### Task Routes
 
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| GET | `/api/tasks` | Get all tasks | Yes |
-| POST | `/api/tasks` | Create new task | Yes |
-| PUT | `/api/tasks/:id` | Update task | Yes |
-| DELETE | `/api/tasks/:id` | Delete task | Yes |
+| Method | Endpoint        | Description   |
+| ------ | --------------- | ------------- |
+| GET    | `/api/task`     | Get all tasks |
+| POST   | `/api/task`     | Create task   |
+| PUT    | `/api/task/:id` | Update task   |
+| DELETE | `/api/task/:id` | Delete task   |
 
 ---
 
-## Request & Response Examples
+### Admin Route
 
-### Register
-```http
-POST /api/auth/register
-Content-Type: application/json
+| Method | Endpoint           | Description                       |
+| ------ | ------------------ | --------------------------------- |
+| GET    | `/api/admin/tasks` | Get all users' tasks (admin only) |
 
-{
-  "name": "Saurabh",
-  "email": "sharma@gmail.com",
-  "password": "knowme12well"
-}
+---
+
+## 🔐 Authentication
+
+All protected routes require:
+
 ```
-
-Response:
-```json
-{
-  "success": true,
-  "message": "user registered successfully"
-}
-```
-
-### Login
-```http
-POST /api/auth/login
-Content-Type: application/json
-
-{
-  "email": "sharma@gmail.com",
-  "password": "knowme12well"
-}
-```
-
-Response:
-```json
-{
-  "success": true,
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-}
-```
-
-### Create Task
-```http
-POST /api/tasks
-Authorization: Bearer <your_token>
-Content-Type: application/json
-
-{
-  "title": "Go to market for groceries",
-  "description": "milk, butter, drinks"
-}
-```
-
-Response:
-```json
-{
-  "success": true,
-  "data": {
-    "title": "Go to market for groceries",
-    "description": "milk, butter, drinks",
-    "completed": false,
-    "user": "69d9645fbdaf5a6c384ccac5",
-    "_id": "69d9f000f51e8994d8a82b3f",
-    "createdAt": "2026-04-11T06:53:52.536Z",
-    "updatedAt": "2026-04-11T06:53:52.536Z",
-    "__v": 0
-  }
-}
-```
-
-### Get All Tasks
-```http
-GET /api/tasks
-Authorization: Bearer <your_token>
-```
-
-Response:
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "_id": "69d9f000f51e8994d8a82b3f",
-      "title": "Go to market for groceries",
-      "description": "milk, butter, drinks",
-      "completed": false,
-      "user": "69d9645fbdaf5a6c384ccac5",
-      "createdAt": "2026-04-11T06:53:52.536Z",
-      "updatedAt": "2026-04-11T06:53:52.536Z"
-    }
-  ]
-}
+Authorization: Bearer <token>
 ```
 
 ---
 
-## Future Improvements
+## 🧪 How to Test
 
-- Task status (todo / in-progress / done)
-- Task priority levels
-- Due dates
-- Frontend with React
-- Real-time notifications
+1. Register a user
+2. Login to get JWT token
+3. Use token in headers
+4. Perform CRUD operations on tasks
 
 ---
 
-## Author
+## 🖼 Screenshots
 
-**Gagan** — [GitHub](https://github.com/Gagan0014)
+### Login Page
+![Login](./screenshots/login.png)
+
+### Dashboard
+![Dashboard](./screenshots/dashboard.png)
+
+## 📈 Scalability Notes
+
+* Can be split into microservices (auth, tasks)
+* Redis can be used for caching
+* Load balancing for high traffic
+* Docker for containerized deployment
+
+---
+
+## 👤 Author
+
+**Gagan**
+GitHub: https://github.com/Gagan0014
