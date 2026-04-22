@@ -177,7 +177,7 @@ Authorization: Bearer <token>
 
 Postman collection is included:
 
-postman_collection.json
+[Download Postman Collection](./postman_collection.json)
 
 Import it into Postman to test APIs.
 
