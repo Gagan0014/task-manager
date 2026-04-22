@@ -173,6 +173,13 @@ Authorization: Bearer <token>
 * Docker for containerized deployment
 
 ---
+## 📮 API Documentation
+
+Postman collection is included:
+
+postman_collection.json
+
+Import it into Postman to test APIs.
 
 ## 👤 Author
 
