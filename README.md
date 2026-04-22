@@ -7,6 +7,7 @@ A full-stack task management application with JWT authentication, role-based acc
 ## 🚀 Live Demo
 
 Baackend Api: `https://task-manager-288g.onrender.com`
+
 Frontend: Runs locally (see setup below)
 ---
 
