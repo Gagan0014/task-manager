@@ -12,5 +12,5 @@ instance.interceptors.request.use((config)=>{
     }
     return config;
 })
-
+console.log("BASE URL:", instance.defaults.baseURL);
 export default instance;

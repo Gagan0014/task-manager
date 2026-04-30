@@ -1,8 +1,16 @@
+import { Routes, Route } from "react-router-dom";
+
+import Login from "./app/login/page.jsx";
+import Tasks from "./app/tasks/page.jsx";
+import Admin from "./app/admin/page.jsx";
+
 function App() {
   return (
-    <h1 className="text-red-500 text-4xl font-bold">
-      Tailwind Working here
-    </h1>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/tasks" element={<Tasks />} />
+      <Route path="/admin" element={<Admin />} />
+    </Routes>
   );
 }
 
