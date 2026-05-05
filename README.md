@@ -1,31 +1,28 @@
-# Task Manager (Full Stack App)
+# Task Manager (Full Stack Application)
 
-A full-stack task management application with JWT authentication, role-based access control, and a simple React frontend.
+A task management application with JWT authentication, role-based access control, and a scalable backend architecture. The project follows clean coding practices and is structured for easy scalability and future enhancements.
 
 ---
 
-## 🚀 Live Demo
+## 🚀 Live API
 
-Baackend Api: `https://task-manager-288g.onrender.com`
+**Backend Base URL:**  
+https://task-manager-288g.onrender.com
 
-Frontend: Runs locally (see setup below)
 ---
 
 ## 🛠 Tech Stack
 
 ### Backend
+- Node.js  
+- Express.js  
+- MongoDB  
+- Mongoose  
+- JWT (Authentication)  
+- Bcrypt (Password Hashing)  
 
-* Node.js
-* Express
-* MongoDB
-* Mongoose
-* JWT (Authentication)
-* Bcrypt (Password hashing)
-
-### Frontend
-
-* React (Vite)
-* Fetch API
+### Frontend (Not Done Yet)
+- React (Vite)
 
 ---
 
@@ -41,25 +38,28 @@ backend/
 ├── utils/
 └── server.js
 
-frontend/
-├── src/
-│   ├── components/
-│   │   ├── Auth.jsx
-│   │   └── Dashboard.jsx
-│   └── App.jsx
+# frontend/ (UI under development)
 ```
 
 ---
 
 ## ✨ Features
 
-* User registration & login
-* JWT-based authentication
-* Role-based access control (Admin/User)
-* Protected routes using middleware
-* CRUD operations for tasks
-* Input validation & error handling
-* Simple React UI connected to backend
+### Authentication & Authorization
+- User registration and login  
+- JWT-based authentication  
+- Role-based access control (Admin/User)  
+
+### Task Management
+- Create, read, update, and delete tasks  
+- Protected routes using middleware  
+- Admin access to all users' tasks  
+
+### Backend Architecture
+- Clean MVC structure  
+- Centralized error handling  
+- Input validation  
+- Scalable and maintainable codebase  
 
 ---
 
@@ -82,28 +82,12 @@ npm install
 npm run dev
 ```
 
-Create `.env` file in backend:
+Create a `.env` file inside the backend folder:
 
 ```
 PORT=5000
 MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret
-```
-
----
-
-### 3. Frontend Setup
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Frontend runs on:
-
-```
-http://localhost:5173
+JWT_SECRET=your_secret_key
 ```
 
 ---
@@ -112,29 +96,29 @@ http://localhost:5173
 
 ### Auth Routes
 
-| Method | Endpoint             | Description   |
-| ------ | -------------------- | ------------- |
-| POST   | `/api/auth/register` | Register user |
-| POST   | `/api/auth/login`    | Login user    |
+| Method | Endpoint              | Description     |
+|--------|----------------------|-----------------|
+| POST   | /api/auth/register   | Register user   |
+| POST   | /api/auth/login      | Login user      |
 
 ---
 
 ### Task Routes
 
-| Method | Endpoint        | Description   |
-| ------ | --------------- | ------------- |
-| GET    | `/api/task`     | Get all tasks |
-| POST   | `/api/task`     | Create task   |
-| PUT    | `/api/task/:id` | Update task   |
-| DELETE | `/api/task/:id` | Delete task   |
+| Method | Endpoint        | Description       |
+|--------|----------------|-------------------|
+| GET    | /api/task      | Get all tasks     |
+| POST   | /api/task      | Create task       |
+| PUT    | /api/task/:id  | Update task       |
+| DELETE | /api/task/:id  | Delete task       |
 
 ---
 
 ### Admin Route
 
-| Method | Endpoint           | Description                       |
-| ------ | ------------------ | --------------------------------- |
-| GET    | `/api/admin/tasks` | Get all users' tasks (admin only) |
+| Method | Endpoint            | Description                        |
+|--------|--------------------|------------------------------------|
+| GET    | /api/admin/tasks   | Get all users' tasks (Admin only) |
 
 ---
 
@@ -143,45 +127,49 @@ http://localhost:5173
 All protected routes require:
 
 ```
-Authorization: Bearer <token>
+Authorization: Bearer <JWT_TOKEN>
 ```
 
 ---
 
-## 🧪 How to Test
+## 🧪 Testing
 
-1. Register a user
-2. Login to get JWT token
-3. Use token in headers
-4. Perform CRUD operations on tasks
+You can test the API using:
+- Postman  
+- Thunder Client  
+- cURL  
 
----
-
-## 🖼 Screenshots
-
-### Login Page
-![Login](./screenshots/login.png)
-
-### Dashboard
-![Dashboard](./screenshots/dashboard.png)
-
-## 📈 Scalability Notes
-
-* Can be split into microservices (auth, tasks)
-* Redis can be used for caching
-* Load balancing for high traffic
-* Docker for containerized deployment
+### Steps:
+1. Register a new user  
+2. Login to get JWT token  
+3. Add token in request headers  
+4. Access protected routes  
 
 ---
+
 ## 📮 API Documentation
 
 Postman collection is included:
 
-[Download Postman Collection](./postman_collection.json)
+```
+/postman_collection.json
+```
 
-Import it into Postman to test APIs.
+Import it into Postman to test all endpoints.
+
+---
+
+## 📈 Future Enhancements
+
+- Improved frontend UI/UX  
+- State management integration  
+- Pagination and filtering  
+- Enhanced security (rate limiting, helmet)  
+- Full-stack deployment  
+
+---
 
 ## 👤 Author
 
-**Gagan**
+**Gagan**  
 GitHub: https://github.com/Gagan0014
