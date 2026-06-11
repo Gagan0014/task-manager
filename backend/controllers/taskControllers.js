@@ -49,6 +49,7 @@ export const getTask = asyncHandler(async (req, res) => {
 
   res.status(200).json({
     success: true,
+    tasks: tasks,
     data: tasks
   });
 });

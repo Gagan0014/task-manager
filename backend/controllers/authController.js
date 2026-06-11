@@ -31,7 +31,13 @@ export const register = asyncHandler(async (req, res, next) => {
 
   res.status(201).json({
     success: true,
-    message: "User registered successfully"
+    message: "User registered successfully",
+    user: { 
+      id: newUser._id,
+      name: newUser.name,
+      email: newUser.email,
+      role: newUser.role
+    }
   });
 });
 
@@ -67,6 +73,12 @@ export const login = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    token
+    token,
+    user: {
+    id: user._id,
+    name: user.name,
+    email: user.email,
+    role: user.role
+  }
   });
 });
