@@ -282,4 +282,3 @@ JWT_SECRET=your_secret_key
 
 GitHub: https://github.com/Gagan0014
 
-LinkedIn: Add your LinkedIn profile here
