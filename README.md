@@ -1,175 +1,276 @@
-# Task Manager (Full Stack Application)
+# Task Manager - Full Stack MERN Application
 
-A task management application with JWT authentication, role-based access control, and a scalable backend architecture. The project follows clean coding practices and is structured for easy scalability and future enhancements.
+A production-ready Task Management application built with the MERN stack. The application provides secure JWT authentication, role-based authorization, task management features, and a responsive frontend interface. It follows clean architecture principles and a scalable folder structure suitable for real-world applications.
 
 ---
 
-## 🚀 Live API
+## 🚀 Live Demo
 
-**Backend Base URL:**  
+### Frontend
+
+https://task-manager-ashen-chi.vercel.app
+
+### Backend API
+
 https://task-manager-288g.onrender.com
 
 ---
 
-## 🛠 Tech Stack
+## 📸 Screenshots
 
-### Backend
-- Node.js  
-- Express.js  
-- MongoDB  
-- Mongoose  
-- JWT (Authentication)  
-- Bcrypt (Password Hashing)  
+> Add screenshots of:
 
-### Frontend (Not Done Yet)
-- React (Vite)
-
----
-
-## 📂 Project Structure
-
-```
-backend/
-├── config/
-├── controllers/
-├── middleware/
-├── models/
-├── routes/
-├── utils/
-└── server.js
-
-# frontend/ (UI under development)
-```
 
 ---
 
 ## ✨ Features
 
 ### Authentication & Authorization
-- User registration and login  
-- JWT-based authentication  
-- Role-based access control (Admin/User)  
+
+* User registration and login
+* JWT-based authentication
+* Password hashing using bcrypt
+* Protected routes
+* Role-based access control (Admin/User)
 
 ### Task Management
-- Create, read, update, and delete tasks  
-- Protected routes using middleware  
-- Admin access to all users' tasks  
 
-### Backend Architecture
-- Clean MVC structure  
-- Centralized error handling  
-- Input validation  
-- Scalable and maintainable codebase  
+* Create tasks
+* View tasks
+* Update tasks
+* Delete tasks
+* User-specific task access
+* Admin access to all users' tasks
+
+### Frontend
+
+* Responsive UI built with React
+* Axios-based API integration
+* Protected client-side routes
+* Authentication persistence using JWT
+* Loading and error handling states
+
+### Backend
+
+* RESTful API architecture
+* MVC pattern
+* Centralized error handling
+* Middleware-based authentication
+* MongoDB database integration
+* Scalable folder structure
 
 ---
 
-## ⚙️ Setup Instructions
+## 🛠 Tech Stack
 
-### 1. Clone the repository
+### Frontend
+
+* React
+* Vite
+* React Router
+* Axios
+* CSS
+
+### Backend
+
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* JWT
+* Bcrypt
+
+### Deployment
+
+* Frontend: Vercel
+* Backend: Render
+* Database: MongoDB Atlas
+
+---
+
+## 📂 Project Structure
+
+```text
+task-manager/
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── context/
+│   │   └── App.jsx
+│   │
+│   └── package.json
+│
+├── backend/
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── utils/
+│   └── server.js
+│
+└── README.md
+```
+
+---
+
+## ⚙️ Installation
+
+### Clone Repository
 
 ```bash
 git clone https://github.com/Gagan0014/task-manager.git
+
 cd task-manager
 ```
 
 ---
 
-### 2. Backend Setup
+## Backend Setup
 
 ```bash
 cd backend
+
 npm install
+
 npm run dev
 ```
 
-Create a `.env` file inside the backend folder:
+Create a `.env` file:
 
-```
+```env
 PORT=5000
+
 MONGODB_URI=your_mongodb_connection_string
+
 JWT_SECRET=your_secret_key
+```
+
+---
+
+## Frontend Setup
+
+```bash
+cd frontend
+
+npm install
+
+npm run dev
+```
+
+Create a `.env` file:
+
+```env
+VITE_API_BASE_URL=http://localhost:5000/api
 ```
 
 ---
 
 ## 🔑 API Endpoints
 
-### Auth Routes
+### Authentication
 
-| Method | Endpoint              | Description     |
-|--------|----------------------|-----------------|
-| POST   | /api/auth/register   | Register user   |
-| POST   | /api/auth/login      | Login user      |
+| Method | Endpoint           | Description   |
+| ------ | ------------------ | ------------- |
+| POST   | /api/auth/register | Register user |
+| POST   | /api/auth/login    | Login user    |
 
----
+### Tasks
 
-### Task Routes
+| Method | Endpoint      | Description    |
+| ------ | ------------- | -------------- |
+| GET    | /api/task     | Get user tasks |
+| POST   | /api/task     | Create task    |
+| PUT    | /api/task/:id | Update task    |
+| DELETE | /api/task/:id | Delete task    |
 
-| Method | Endpoint        | Description       |
-|--------|----------------|-------------------|
-| GET    | /api/task      | Get all tasks     |
-| POST   | /api/task      | Create task       |
-| PUT    | /api/task/:id  | Update task       |
-| DELETE | /api/task/:id  | Delete task       |
+### Admin
 
----
-
-### Admin Route
-
-| Method | Endpoint            | Description                        |
-|--------|--------------------|------------------------------------|
-| GET    | /api/admin/tasks   | Get all users' tasks (Admin only) |
+| Method | Endpoint         | Description          |
+| ------ | ---------------- | -------------------- |
+| GET    | /api/admin/tasks | Get all users' tasks |
 
 ---
 
 ## 🔐 Authentication
 
-All protected routes require:
+Protected routes require:
 
-```
+```http
 Authorization: Bearer <JWT_TOKEN>
 ```
 
----
+Workflow:
 
-## 🧪 Testing
-
-You can test the API using:
-- Postman  
-- Thunder Client  
-- cURL  
-
-### Steps:
-1. Register a new user  
-2. Login to get JWT token  
-3. Add token in request headers  
-4. Access protected routes  
+1. Register/Login
+2. Receive JWT token
+3. Store token on client
+4. Send token in Authorization header
+5. Access protected routes
 
 ---
 
-## 📮 API Documentation
+## 📮 API Testing
 
-Postman collection is included:
+The project includes a Postman collection:
 
-```
-/postman_collection.json
+```text
+postman_collection.json
 ```
 
-Import it into Postman to test all endpoints.
+Import it into Postman to test all API endpoints.
 
 ---
 
-## 📈 Future Enhancements
+## 🌐 Deployment
 
-- Improved frontend UI/UX  
-- State management integration  
-- Pagination and filtering  
-- Enhanced security (rate limiting, helmet)  
-- Full-stack deployment  
+### Frontend
+
+Deployed on Vercel.
+
+### Backend
+
+Deployed on Render.
+
+### Environment Variables
+
+Frontend:
+
+```env
+VITE_API_BASE_URL=https://task-manager-288g.onrender.com/api
+```
+
+Backend:
+
+```env
+PORT=5000
+MONGODB_URI=your_connection_string
+JWT_SECRET=your_secret_key
+```
 
 ---
 
-## 👤 Author
+## 📈 Future Improvements
 
-**Gagan**  
+* Task categories
+* Task priority levels
+* Due dates and reminders
+* Search and filtering
+* Pagination
+* Dark mode
+* Email notifications
+* Activity logs
+* Real-time updates with Socket.io
+
+---
+
+## 👨‍💻 Author
+
+**Gagan**
+
 GitHub: https://github.com/Gagan0014
+
+LinkedIn: Add your LinkedIn profile here
