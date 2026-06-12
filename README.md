@@ -18,8 +18,17 @@ https://task-manager-288g.onrender.com
 
 ## 📸 Screenshots
 
-> Add screenshots of:
+### Login Page
 
+![Login](./screenshots/Login.png)
+
+### Register Page
+
+![Register](./screenshots/Register.png)
+
+### Dashboard
+
+![Dashboard](./screenshots/Dashboard.png)
 
 ---
 
