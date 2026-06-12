@@ -20,15 +20,15 @@ https://task-manager-288g.onrender.com
 
 ### Login Page
 
-![Login](./screenshots/Login.png)
+![Login](./Screenshots/Login.png)
 
 ### Register Page
 
-![Register](./screenshots/Register.png)
+![Register](./Screenshots/Register.png)
 
 ### Dashboard
 
-![Dashboard](./screenshots/Dashboard.png)
+![Dashboard](./Screenshots/Dashboard.png)
 
 ---
 
